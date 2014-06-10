@@ -6,9 +6,9 @@ function autoload48d302ec5e8adc15aa22ef1acb6c7bd9($class) {
     static $classes = null;
     if ($classes === null) {
         $classes = array(
-            'templateplugin' => '/templatePlugin.class.php',
-            'templateplugindescriptor' => '/TemplatePluginDescriptor.class.php',
-            'templateplugininfo' => '/TemplatePluginInfo.class.php'
+            'obsolescenceplugin' => '/obsolescencePlugin.class.php',
+            'obsolescenceplugindescriptor' => '/ObsolescencePluginDescriptor.class.php',
+            'obsolescenceplugininfo' => '/ObsolescencePluginInfo.class.php'
         );
     }
     $cn = strtolower($class);

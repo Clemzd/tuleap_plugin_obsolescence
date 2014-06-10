@@ -18,16 +18,16 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('pre.php');
-require_once('common/plugin/PluginManager.class.php');
 
-$plugin_manager =& PluginManager::instance();
-$p = $plugin_manager->getPluginByName('obsolescence');
+require_once('common/plugin/PluginFileInfo.class.php');
+require_once('ObsolescencePluginDescriptor.class.php');
 
-if ($p && $plugin_manager->isPluginAvailable($p)) {
-    $p->process();
-} else {
-    header('Location: '.get_server_url());
+class ObsolescencePluginInfo extends PluginFileInfo {
+    
+    function __construct($plugin) {
+        parent::__construct($plugin, 'obsolescence');
+        $this->setPluginDescriptor(new ObsolescencePluginDescriptor());
+    }
+    
 }
-
 ?>
