@@ -32,6 +32,7 @@ class ObsolescencePlugin extends Plugin {
         echo '<h1>Obsolescence</h1>';
         echo $this->getPluginInfo()->getpropVal('answer');
         echo 'clement guet';
+        
     }
 }
 
