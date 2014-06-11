@@ -2,3 +2,6 @@ plugin_obsolescence	descriptor_description	Indicateur d'obsolescence d'un projet
 plugin_obsolescence	descriptor_name	Obsolescence
 
 plugin_obsolescence	title	Obsolescence
+
+plugin_obsolescence service_lbl_key Obsolescence
+plugin_obsolescence service_desc_key Un plugin indiquant l'obsolescence technique du projet
