@@ -27,25 +27,30 @@
  */
 
 class ObsolescencePluginViews {
+	
+	private $cpt = 0;
 
 	public function __construct() {
 	}
 
 	public function displayForm($technoUsed, $allTechno) {
-		$opt = $this->addList(null, $allTechno);
 
 		$testTab = json_encode($allTechno);
 
 		$content = "<script type=\"text/javascript\">
 	
+		var cptJs = 0;
 		
-		function add(){
+		function add(cpt){
+				cpt += cptJs;
+				cptJs++;
 				list = document.createElement('select');
+				list.name = 'idTech['+cpt+']';
 				var index;
 				var tabTechnos = ".$testTab.";
 				
 						for (index = 0; index < tabTechnos.length; ++index) {					
-	 						list.options[index] = new Option(tabTechnos[index]['tech_name'],tabTechnos[index]['id_tech']);
+	 						list.options[index] = new Option(tabTechnos[index]['tech_name']+' '+tabTechnos[index]['tech_version'],tabTechnos[index]['id_tech']);
  						}
 				document.getElementById('listTechnologiesIds').appendChild(list);				
 				document.getElementById('listTechnologiesIds').appendChild(document.createElement('br'));
@@ -53,13 +58,13 @@ class ObsolescencePluginViews {
 
 				</script>";
 
-		$content .= "<form method=\"post\" action=\"../www/index.php?modify=false\">";
+		$content .= "<form method=\"post\" action=\"?modify=false&group_id=".$_GET['group_id']."\">";
 
 		$content .= $this->displayList($technoUsed, $allTechno);
 
-		$content .= "<input type=\"Button\" value=\"Ajouter\" onclick=\"add()\" /><br/>";
+		$content .= "<input type=\"Button\" value=\"Ajouter\" onclick=\"add(".$this->cpt.")\" /><br/>";
 
-		$content .= "<br/><input type=\"Button\" value=\"Valider\" />
+		$content .= "<br/><input type=\"Submit\" value=\"Valider\" />
 				</form>";
 
 		return $content;
@@ -86,8 +91,8 @@ class ObsolescencePluginViews {
 	}
 
 	public function addList($tech_id, $allTechno) {
-
-		$content = "<SELECT>";
+		
+		$content = "<SELECT NAME=\"idTech[".$this->cpt."]\">";
 
 		if (isset($tech_id)) {
 
@@ -100,6 +105,7 @@ class ObsolescencePluginViews {
 				}
 
 				$content .= ">".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
+				
 			}
 		} else {
 			foreach ($allTechno as $techno) {
@@ -108,6 +114,8 @@ class ObsolescencePluginViews {
 		}
 
 		$content .= '</SELECT><BR/>';
+		
+		$this->cpt++;
 
 		return $content;
 	}

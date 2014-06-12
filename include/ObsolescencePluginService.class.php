@@ -29,7 +29,7 @@ class ObsolescencePluginService {
     
     public function addTechnologies($listTechnologiesIds, $groupId) {
     	$this->_obsolescencePluginDao->deleteTechnologies($groupId);
-        $this->_obsolescencePluginDao->addTechnologies($listTechnologiesIds);
+        $this->_obsolescencePluginDao->addTechnologies($listTechnologiesIds,$groupId);
     }
     
     public function readTechnologiesFromProject($group_id){

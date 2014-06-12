@@ -44,14 +44,19 @@ class ObsolescencePlugin extends Plugin {
         	$content = $obsolescenceViews->displayForm($technoUsed, $allTechno);
         	echo $content;
         }else{
-        	// report        	
-        	// foreach($_POST['listTechnologiesIds'] as $techId) {
-        	//	echo $techId;
-        	//}
-        	 
-        	// $obsolescenceService->addTechnologies($technoUsed, $groupId);
-        	$content = $obsolescenceReportViews->displayReport($technoUsed);
-        	echo $content;
+	 		// report    
+	 		echo "<a href=?modify=true&group_id=".$_GET['group_id']."\">Modifier les technos</a>";
+        	
+			if (isset($_POST['idTech'])) {
+				$techIds = $_POST['idTech'];	
+				 		
+				$obsolescenceService->addTechnologies($techIds, $_GET['group_id']);
+        	
+	        	$technoUsed = $obsolescenceService->readTechnologiesFromProject($_GET['group_id']);
+	        	$content = $obsolescenceReportViews->displayReport($technoUsed);
+	        	echo $content;
+			}
+        
  
         }
     }

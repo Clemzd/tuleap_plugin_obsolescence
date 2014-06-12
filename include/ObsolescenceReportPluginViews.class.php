@@ -31,8 +31,7 @@ class ObsolescenceReportPluginViews {
     public function __construct() {
     }
     
-    public function displayReport($technoUsed) {
-  	
+    public function displayReport($technoUsed) {  	
     	$content = '
     	<table class="table table-striped">
     	
