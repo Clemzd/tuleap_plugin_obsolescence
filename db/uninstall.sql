@@ -8,4 +8,4 @@ DROP TABLE `plugin_obsolescence_groups_technologies`;
 
 
 -- Delete of the service for the plugin Obsolescence
-DELETE FROM 'service' WHERE 'short_name'='obsolescence';
+DELETE FROM `service` WHERE `short_name`=`obsolescence`;
