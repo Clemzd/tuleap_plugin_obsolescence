@@ -39,7 +39,6 @@ class ObsolescencePluginDao extends DataAccessObject {
 
 		foreach($listTechnologiesIds as $techId) {
 			$sql = "INSERT INTO plugin_obsolescence_groups_technologies VALUES (" . $groupId . "," . $techId . ")";
-			echo $sql;
 			$this->update($sql);
 		}
 	}
@@ -61,7 +60,7 @@ class ObsolescencePluginDao extends DataAccessObject {
 	 * @return array(array())
 	 */
 	function readTechnologiesFromProject($groupId) {
-		$sql = "SELECT obs.tech_name, obs.tech_version, obs.release, obs.endoflife
+		$sql = "SELECT obs.id_tech, obs.tech_name, obs.tech_version, obs.release, obs.endoflife
 				FROM plugin_obsolescence_technologies obs, plugin_obsolescence_groups_technologies groups
 				WHERE obs.id_tech = groups.tech_id
 				AND groups.group_id = '" . $groupId . "'";

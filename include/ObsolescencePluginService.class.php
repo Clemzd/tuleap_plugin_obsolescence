@@ -33,12 +33,21 @@ class ObsolescencePluginService {
     }
     
     public function readTechnologiesFromProject($group_id){
-    	return $this->_obsolescencePluginDao->readTechnologiesFromProject($group_id);
+    	return $this->darToArray($this->_obsolescencePluginDao->readTechnologiesFromProject($group_id));
     }
     
     public function readTechnologies() {
-    	return $this->_obsolescencePluginDao->readTechnologies();
+    	return $this->darToArray($this->_obsolescencePluginDao->readTechnologies());
     }
+    
+    public function darToArray($dar){
+    	$rows = array();
+    	foreach($dar as $row){
+			array_push($rows, $row);
+    	}
+    	return $rows;
+    }
+    
 
 }
 

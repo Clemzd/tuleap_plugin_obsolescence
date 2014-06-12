@@ -34,7 +34,7 @@ class ObsolescencePluginViews {
     public function displayForm($technoUsed, $allTechno) {
     	$content = "<form method=\"post\" action=\"index.php?modify=false\">";
     	
-    	$content .= displayList($technoUsed, $allTechno);
+    	$content .= $this->displayList($technoUsed, $allTechno);
     	    	
     	$content .= "<input type=\"Button\" value=\"Valider\" />
 					</form>";
@@ -53,13 +53,13 @@ class ObsolescencePluginViews {
     		
     			foreach ($allTechno as $techno) {
     				
-    				$content .= "<OPTION value=\"".$technoUsed['tech_id']."\"";
+    				$content .= "<OPTION value=\"".$techno['id_tech']."\"";
     				
-    				if ($techno['tech_id'] == $technoUse['tech_id']) {
+    				if ($techno['id_tech'] == $technoUse['id_tech']) {
     					$content .= " SELECTED=\"SELECTED\"";
     				}
     				
-    				$content .= ">".$technoUsed['tech_name']." ".$techUsed['tech_version']."</OPTION>";
+    				$content .= ">".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
     		
     				$cpt++;
     			}
@@ -67,7 +67,7 @@ class ObsolescencePluginViews {
     		}
     	} else {
     		foreach ($allTechno as $techno) {
-    			$content .= "<OPTION value=\"".$technoUsed['tech_id']."\>".$technoUsed['tech_name']." ".$techUsed['tech_version']."</OPTION>";
+    			$content .= "<OPTION value=\"".$techno['id_tech']."\>".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
     		}
     	}	
     	
