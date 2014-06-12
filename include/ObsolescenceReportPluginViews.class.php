@@ -33,7 +33,7 @@ class ObsolescenceReportPluginViews {
     
     public function displayReport($technoUsed) {
   	
-    	$content.= '
+    	$content = '
     	<table class="table table-striped">
     	
     	<thead>
@@ -43,19 +43,42 @@ class ObsolescenceReportPluginViews {
 	    		<th>Dépréciation dans 2 ans</th>
 	    	</tr>
 		</thead>';
-    				
+    		
+    	$counterDepreciateToday = 0;
+    	$counterDepreciateTowYears = 0;
+    		
     	foreach($technoUsed as $technoUse) {
+    		
+    		
+    		$depreciate_today = ($technoUse['depreciate_today']==1);
+    		$depreciate_two_years = ($technoUse['depreciate_two_years']==1);
+    		if($depreciate_today){
+    			$counterDepreciateToday++;
+    		}
+    		if($depreciate_two_years){
+    			$counterDepreciateTowYears++;
+    		}
+    		
     		$content .= '<tbody>
     				<tr>
-    					<td>' . $technoUse['tech_name'] . '</td>
-    					<td>' . $technoUse['depreciate_today'] . '</td>
-    					<td>' . $technoUse['depreciate_two_years'] . '</td>
-    				</tr>
-    			</tbody>';
+    					<td>' . $technoUse['tech_name'] . '</td>' .
+    					'<td class="' . $this->styleDeprecated($depreciate_today) . '">X</td>' .
+    					'<td>' . $technoUse['depreciate_two_years'] . '</td>'
+    				. '</tr></tbody>';
     	}
     	$content .= '</table>';
+    	$score = (($counterDepreciateToday*2) + $counterDepreciateTowYears) / (3 * count($technoUsed));
+		$content .=  '<h3>Score : ' . $score . '<h3>';
     	
     	return $content;
+    }
+    
+    public function styleDeprecated($bool){
+    	if($bool){
+    		return 'green';
+    	}else{
+    		return 'black';
+    	}
     }
 }
 ?>
