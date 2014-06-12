@@ -1,22 +1,22 @@
 <?php
 /**
- * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- *
- * This file is a part of Codendi.
- *
- * Codendi is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * Codendi is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Codendi. If not, see <http://www.gnu.org/licenses/
- */
+  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+  *
+  * This file is a part of Codendi.
+  *
+  * Codendi is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation; either version 2 of the License, or
+  * (at your option) any later version.
+  *
+  * Codendi is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  * GNU General Public License for more details.
+  *
+  * You should have received a copy of the GNU General Public License
+  * along with Codendi. If not, see <http://www.gnu.org/licenses/
+  */
 /**
  *
  * This is a part of lite Model/View/Controler design pattern.
@@ -28,68 +28,52 @@
 
 class ObsolescencePluginViews {
 
-	public function __construct() {
-	}
+    public function __construct() {
+    }
+    
+    public function displayForm($technoUsed, $allTechno) {
+    	$content = "<form method=\"post\" action=\"index.php?modify=false\">";
+    	
+    	$content .= $this->displayList($technoUsed, $allTechno);
+    	    	
+    	$content .= "<input type=\"Button\" value=\"Valider\" />
+					</form>";
+    	
+    	return $content;
+    }
 
-	public function displayForm($technoUsed, $allTechno) {
-		$opt = addList(null, $allTechno);
-		
-		$content = "<script type=\"text/javascript\">
-						function add(){
-							document.getElementByName('listTechnologiesIds').appendChild(document.createElement(\"".$opt."\"));
-						}
-					</script>";
-		
-		$content .= "<form method=\"post\" action=\"index.php?modify=false\">";
-		 
-		$content .= $this->displayList($technoUsed, $allTechno);
-		
-		$content .= "<input type=\"Button\" value=\"Ajouter\" onclick=\"add()\" /><br/>";
+    public function displayList($technoUsed, $allTechno) {
 
-		$content .= "<br/><input type=\"Button\" value=\"Valider\" />
-				</form>";
-		 
-		return $content;
-	}
-
-	public function displayList($technoUsed, $allTechno) {
-
-		$content = "<SELECT NAME=\"listTechnologiesIds\">";
-		 
-		if (sizeof($technoUsed) > 0) {
-
-			foreach($technoUsed as $technoUse) {
-
-				addList($technoUse['tech_id'], $allTechno);
-
-			}
-		} else {
-			addList(null, $allTechno);
-		}
-		 
-		$content .= "</SELECT>";
-		 
-		return $content;
-	}
-
-	public function addList($tech_id, $listTechnos) {
-		if (isset($tech_id)) {
-			
-			foreach ($allTechno as $techno) {
-
-				$content .= "<OPTION value=\"".$techno['id_tech']."\"";
-
-				if ($techno['id_tech'] == $tech_id) {
-					$content .= " SELECTED=\"SELECTED\"";
-				}
-
-				$content .= ">".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
-			}
-		} else {
-			foreach ($allTechno as $techno) {
-				$content .= "<OPTION value=\"".$techno['id_tech']."\>".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
-			}
-		}
-	}
+    	$content = "<SELECT NAME=\"listTechnologiesIds\">";
+    	$cpt = 0;
+    	
+    	if (sizeof($technoUsed) > 0) {
+    		
+    		foreach($technoUsed as $technoUse) {
+    		
+    			foreach ($allTechno as $techno) {
+    				
+    				$content .= "<OPTION value=\"".$techno['id_tech']."\"";
+    				
+    				if ($techno['id_tech'] == $technoUse['id_tech']) {
+    					$content .= " SELECTED=\"SELECTED\"";
+    				}
+    				
+    				$content .= ">".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
+    		
+    				$cpt++;
+    			}
+    		
+    		}
+    	} else {
+    		foreach ($allTechno as $techno) {
+    			$content .= "<OPTION value=\"".$techno['id_tech']."\>".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
+    		}
+    	}	
+    	
+    	$content .= "</SELECT>";
+    	
+    	return $content;
+    }
 }
 ?>

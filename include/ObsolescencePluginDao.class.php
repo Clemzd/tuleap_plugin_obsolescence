@@ -60,7 +60,9 @@ class ObsolescencePluginDao extends DataAccessObject {
 	 * @return array(array())
 	 */
 	function readTechnologiesFromProject($groupId) {
-		$sql = "SELECT obs.id_tech, obs.tech_name, obs.tech_version, obs.release, obs.endoflife
+		$sql = "SELECT obs.id_tech, obs.tech_name, obs.tech_version, obs.release, obs.endoflife,
+				obs.endoflife <= current_date as depreciate_today,
+				obs.endoflife <= date_add(current_date, interval 2 year) as depreciate_two_years
 				FROM plugin_obsolescence_technologies obs, plugin_obsolescence_groups_technologies groups
 				WHERE obs.id_tech = groups.tech_id
 				AND groups.group_id = '" . $groupId . "'";
