@@ -1,13 +1,3 @@
-## 
-## Sql Install Script
-##
-/*
-CREATE TABLE `plugin_obsolescence_my_table` (
-  `id` TINYINT NOT NULL ,
-  PRIMARY KEY ( `id` )
-);
-*/
-
 -- Create the table of technologies
 CREATE TABLE `plugin_obsolescence_technologies` (
   `id_tech` INT NOT NULL,

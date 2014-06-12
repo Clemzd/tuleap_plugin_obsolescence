@@ -18,7 +18,6 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-// require_once('www/project/export/project_export_utils.php');
 require_once 'common/dao/include/DataAccessObject.class.php';
 
 /**
@@ -33,31 +32,26 @@ class ObsolescencePluginDao extends DataAccessObject {
 	/**
 	 * Associate the given technologies with the project in the bdd
 	 * 
-	 * @param list of int $listTechIds
+	 * @param list of int $listTechnologiesIds
 	 * @param int $groupId
 	 */
-	function addTechnologies($listTechIds, $groupId) {
+	function addTechnologies($listTechnologiesIds, $groupId) {
 
-		foreach($listTechIds as $techId) {
-			$sql = "INSERT INTO tuleap.plugin_obsolescence_groups_technologies
-					VALUES (" + $groupId + "," + $techId + ");";
-			$this->retrieve($sql);
+		foreach($listTechnologiesIds as $techId) {
+			$sql = "INSERT INTO plugin_obsolescence_groups_technologies VALUES (" . $groupId . "," . $techId . ")";
+			echo $sql;
+			$this->update($sql);
 		}
 	}
 
 	/**
 	 * Delete the association between the given technologies and the project in the bdd
 	 * 
-	 * @param list of int $listTechIds
 	 * @param int $groupId
 	 */
-	function delTechnologies($listTechIds, $groupId) {
-
-		foreach($listTechIds as $techId) {
-			$sql = "DELETE FROM tuleap.plugin_obsolescence_groups_technologies
-					WHERE group_id = " + $groupId + " AND tech_id = " + $techId + ");";
-			$this->retrieve($sql);
-		}
+	function deleteTechnologies($groupId) {
+		$sql = "DELETE FROM plugin_obsolescence_groups_technologies WHERE group_id = " . $groupId;
+		$this->update($sql);
 	}
 
 	/**
@@ -66,31 +60,18 @@ class ObsolescencePluginDao extends DataAccessObject {
 	 * @param int $groupId
 	 * @return array(array())
 	 */
-	function getTechnologiesFromProject($groupId) {
-		$result = array();
-		$cpt = 0;
-
+	function readTechnologiesFromProject($groupId) {
 		$sql = "SELECT obs.tech_name, obs.tech_version, obs.release, obs.endoflife
-				FROM tuleap.plugin_obsolescence_technologies obs, tuleap.plugin_obsolescence_groups_technologies groups
-				WHERE obs.tech_id = groups.tech_id
-				AND groups.group_id = " + $groupId + ";";
-		$dar = $this->retrieve($sql);
-
-		foreach(dar as $row) {
-			
-			$line = array(
-				"tech_name" => $row['tech_name'],
-				"tech_version" => $row['tech_version'],
-				"release" => $row['release'],
-				"endoflife" => $row['endoflife']		
-			);	
-			
-			$result[$cpt] = $line;
-						
-			$cpt++;
-		}
+				FROM plugin_obsolescence_technologies obs, plugin_obsolescence_groups_technologies groups
+				WHERE obs.id_tech = groups.tech_id
+				AND groups.group_id = '" . $groupId . "'";
+		return $this->retrieve($sql);
+	}
+	
+	function readTechnologies(){
+		$sql = "select id_tech,tech_name,tech_version,plugin_obsolescence_technologies.release,endoflife from plugin_obsolescence_technologies";
+		return $this->retrieve($sql);
 		
-		return $result;
 	}
 
 }

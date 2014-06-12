@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
+ * Copyright (c) STMicroelectronics, 2004-2009. All rights reserved
  *
  * This file is a part of Codendi.
  *
@@ -18,16 +18,24 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once 'ObsolescencePluginDao.class.php';
 
-require_once('common/plugin/PluginFileInfo.class.php');
-require_once('ObsolescencePluginDescriptor.class.php');
-
-class ObsolescencePluginInfo extends PluginFileInfo {
+class ObsolescencePluginService {
+    protected $_obsolescencePluginDao;
     
-    function __construct($plugin) {
-        parent::__construct($plugin, 'obsolescence');
-        $this->setPluginDescriptor(new ObsolescencePluginDescriptor());
+	public function __construct() {
+		$this->_obsolescencePluginDao = new ObsolescencePluginDao(CodendiDataAccess::instance());
+	}
+    
+    public function addTechnologies($listTechnologiesIds, $groupId) {
+    	$this->_obsolescencePluginDao->deleteTechnologies($groupId);
+        $this->_obsolescencePluginDao->addTechnologies($listTechnologiesIds);
     }
     
+    public function readTechnologiesFromProject($group_id){
+    	return $this->_obsolescencePluginDao->readTechnologiesFromProject($group_id);
+    }
+
 }
+
 ?>

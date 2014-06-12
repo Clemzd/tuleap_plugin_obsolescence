@@ -1,6 +1,7 @@
 <?php
 
 require_once('common/plugin/Plugin.class.php');
+require_once 'ObsolescencePluginService.class.php';
 
 class ObsolescencePlugin extends Plugin {
 	
@@ -30,10 +31,15 @@ class ObsolescencePlugin extends Plugin {
     
     function process() {
         echo '<h1>Obsolescence</h1>';
-        echo $this->getPluginInfo()->getpropVal('answer');
-        echo 'clement guet';
-        
+        $obsolescenceService = new ObsolescencePluginService();
+
+        if(isset($_POST['$listTechnologiesIds'])){
+        	// enregistrement
+        }else{
+        	// report 
+        }
     }
+    
 }
 
 ?>
