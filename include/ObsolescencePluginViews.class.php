@@ -33,26 +33,27 @@ class ObsolescencePluginViews {
 
 	public function displayForm($technoUsed, $allTechno) {
 		$opt = $this->addList(null, $allTechno);
-		
+
 		$testTab = json_encode($allTechno);
 
 		$content = "<script type=\"text/javascript\">
-
+	
+		
+		function add(){
 				list = document.createElement('select');
-
 				var index;
-				var tabTechnos = ". $testTab .";
-						for (index = 0; index < a.length; ++index) {
-							console.log(tabTechnos['id_tech']);
-							list.options[index] = new Options(tabTechnos['tech_name'],tabTechnos['id_tech'];
-						}
+				var tabTechnos = ".$testTab.";
+				
+						for (index = 0; index < tabTechnos.length; ++index) {					
+	 						list.options[index] = new Option(tabTechnos[index]['tech_name'],tabTechnos[index]['id_tech']);
+ 						}
+				document.getElementById('listTechnologiesIds').appendChild(list);				
+				document.getElementById('listTechnologiesIds').appendChild(document.createElement('br'));
+		}
 
-						function add(){
-							document.getElementByName('listTechnologiesIds').appendChild(list);
-						}
 				</script>";
 
-		$content .= "<form method=\"post\" action=\"index.php?modify=false\">";
+		$content .= "<form method=\"post\" action=\"../www/index.php?modify=false\">";
 
 		$content .= $this->displayList($technoUsed, $allTechno);
 
@@ -72,11 +73,11 @@ class ObsolescencePluginViews {
 
 			foreach($technoUsed as $technoUse) {
 
-				$this->addList($technoUse['id_tech'], $allTechno);
+				$content .= $this->addList($technoUse['id_tech'], $allTechno);
 
 			}
 		} else {
-			$this->addList(null, $allTechno);
+			$content .=  $this->addList(null, $allTechno);
 		}
 
 		$content .= "</DIV>";
@@ -105,8 +106,8 @@ class ObsolescencePluginViews {
 				$content .= "<OPTION value=\"".$techno['id_tech']."\>".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
 			}
 		}
-		
-		$content .= '</SELECT>';
+
+		$content .= '</SELECT><BR/>';
 
 		return $content;
 	}
