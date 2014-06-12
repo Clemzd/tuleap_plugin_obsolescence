@@ -3,3 +3,4 @@ plugin_obsolescence	descriptor_name	Obsolescence
 
 plugin_obsolescence	service_lbl_key	Obsolescence
 plugin_obsolescence	service_desc_key	A plugin showing the project technologic obsolescence
+plugin_obsolescence	service_short_key	obsolescence
