@@ -2,6 +2,7 @@
 
 require_once('common/plugin/Plugin.class.php');
 require_once 'ObsolescencePluginService.class.php';
+require_once('ObsolescencePluginViews.class.php');
 
 class ObsolescencePlugin extends Plugin {
 	
@@ -32,8 +33,13 @@ class ObsolescencePlugin extends Plugin {
     function process() {
         echo '<h1>Obsolescence</h1>';
         $obsolescenceService = new ObsolescencePluginService();
+        $obsolescenceViews = new ObsolescencePluginViews();
 
-        if(isset($_POST['$listTechnologiesIds'])){
+        if(isset($_GET['modify']) && $_GET['modify'] == 'true'){
+        	$technoUsed = $obsolescenceService->readTechnologiesFromProject($_GET['group_id']);
+        	$allTechno = $obsolescenceService->readTechnologies();
+        	$content = $obsolescenceViews->displayForm($technoUsed, $allTechno);
+        	echo $content;
         	// enregistrement
         }else{
         	// report 

@@ -35,6 +35,10 @@ class ObsolescencePluginService {
     public function readTechnologiesFromProject($group_id){
     	return $this->_obsolescencePluginDao->readTechnologiesFromProject($group_id);
     }
+    
+    public function readTechnologies() {
+    	return $this->_obsolescencePluginDao->readTechnologies();
+    }
 
 }
 

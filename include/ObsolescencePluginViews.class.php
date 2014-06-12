@@ -32,7 +32,7 @@ class ObsolescencePluginViews {
     }
     
     public function displayForm($technoUsed, $allTechno) {
-    	$content = "<form method=\"post\" action=\"index.php\">";
+    	$content = "<form method=\"post\" action=\"index.php?modify=false\">";
     	
     	$content .= displayList($technoUsed, $allTechno);
     	    	
