@@ -33,13 +33,15 @@ class ObsolescencePluginViews {
 
 	public function displayForm($technoUsed, $allTechno) {
 		$opt = $this->addList(null, $allTechno);
+		
+		$testTab = json_encode($allTechno);
 
 		$content = "<script type=\"text/javascript\">
 
 				list = document.createElement('select');
 
 				var index;
-				var tabTechnos = ". $allTechno .";
+				var tabTechnos = ". $testTab .";
 						for (index = 0; index < a.length; ++index) {
 							console.log(tabTechnos['id_tech']);
 							list.options[index] = new Options(tabTechnos['tech_name'],tabTechnos['id_tech'];
