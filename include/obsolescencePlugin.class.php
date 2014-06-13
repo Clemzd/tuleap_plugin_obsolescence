@@ -31,7 +31,7 @@ class ObsolescencePlugin extends Plugin {
         echo '<li><a href="'.$this->getPluginPath().'/">Obsolescence</a></li>';
     }
     
-    function process() {
+    function process() {        
         echo '<h1>Obsolescence</h1>';
         $obsolescenceService = new ObsolescencePluginService();
         $obsolescenceViews = new ObsolescencePluginViews();

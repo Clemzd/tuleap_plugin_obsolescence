@@ -25,6 +25,7 @@ $plugin_manager =& PluginManager::instance();
 $p = $plugin_manager->getPluginByName('obsolescence');
 
 if ($p && $plugin_manager->isPluginAvailable($p)) {
+	echo '<link rel="stylesheet" type="text/css" href="css/bootstrap.css">';
     $p->process();
 } else {
     header('Location: '.get_server_url());

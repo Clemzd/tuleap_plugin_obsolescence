@@ -45,6 +45,7 @@ class ObsolescencePluginViews {
 				cpt += cptJs;
 				cptJs++;
 				list = document.createElement('select');
+				list.setAttribute('class','form-control');
 				list.name = 'idTech['+cpt+']';
 				var index;
 				var tabTechnos = ".$testTab.";
@@ -62,9 +63,9 @@ class ObsolescencePluginViews {
 
 		$content .= $this->displayList($technoUsed, $allTechno);
 
-		$content .= "<input type=\"Button\" value=\"Ajouter\" onclick=\"add(".$this->cpt.")\" /><br/>";
+		$content .= "<div><input type=\"Button\" value=\"Ajouter\" class=\"btn btn-primary btn-lg\" onclick=\"add(".$this->cpt.")\" />";
 
-		$content .= "<br/><input type=\"Submit\" value=\"Valider\" />
+		$content .= "&nbsp;&nbsp;&nbsp;<input type=\"Submit\" class=\"btn btn-primary btn-lg\" value=\"Valider\" /></div>
 				</form>";
 
 		return $content;
@@ -92,7 +93,7 @@ class ObsolescencePluginViews {
 
 	public function addList($tech_id, $allTechno) {
 		
-		$content = "<SELECT NAME=\"idTech[".$this->cpt."]\">";
+		$content = "<SELECT class=\"form-control\" NAME=\"idTech[".$this->cpt."]\">";
 
 		if (isset($tech_id)) {
 
