@@ -32,7 +32,7 @@ class ObsolescencePlugin extends Plugin {
     }
     
     function process() {        
-        echo '<h1>Obsolescence</h1>';
+        echo '<h1 class="well">Obsolescence</h1>';
         $obsolescenceService = new ObsolescencePluginService();
         $obsolescenceViews = new ObsolescencePluginViews();
 		$obsolescenceReportViews = new ObsolescenceReportPluginViews();
@@ -40,12 +40,13 @@ class ObsolescencePlugin extends Plugin {
 		
         if(isset($_GET['modify']) && $_GET['modify'] == 'true'){
         	// enregistrement
+        	echo '<a href=https://localhost/>Accueil</a>';
         	$allTechno = $obsolescenceService->readTechnologies();
         	$content = $obsolescenceViews->displayForm($technoUsed, $allTechno);
         	echo $content;
         }else{
 	 		// report    
-	 		echo "<a href=?modify=true&group_id=".$_GET['group_id']."\">Modifier les technos</a>";
+	 		echo "<div class='alert alert-info'><a href=?modify=true&group_id=".$_GET['group_id']."\">Modifier les technos</a></div>";
         	
 			if (isset($_POST['idTech'])) {
 				$techIds = $_POST['idTech'];	

@@ -110,7 +110,7 @@ class ObsolescencePluginViews {
 			}
 		} else {
 			foreach ($allTechno as $techno) {
-				$content .= "<OPTION value=\"".$techno['id_tech']."\>".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
+				$content .= "<OPTION value=\"".$techno['id_tech']."\"\>".$techno['tech_name']." ".$techno['tech_version']."</OPTION>";
 			}
 		}
 
