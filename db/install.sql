@@ -340,4 +340,4 @@ CREATE TABLE `plugin_obsolescence_groups_technologies` (
   PRIMARY KEY (`group_id`, `tech_id`));
   
 --Addition of the service for the plugin Obsolescence
-INSERT INTO `service` (`group_id`, `label`, `description`, `short_name`, `link`, `is_active`, `is_used`, `scope`, `rank`,`location`,`is_in_iframe`) VALUES ('100', 'plugin_obsolescence:service_lbl_key','plugin_obsolescence:service_desc_key','obsolescence','/plugin/obsolescence/?group_id=$group_id','1','1','system','220','master','0');
+INSERT INTO `service` (`group_id`, `label`, `description`, `short_name`, `link`, `is_active`, `is_used`, `scope`, `rank`,`location`,`is_in_iframe`) VALUES ('100', 'plugin_obsolescence:service_lbl_key','plugin_obsolescence:service_desc_key','obsolescence','/plugins/obsolescence/?group_id=$group_id','1','1','system','220','master','0');
