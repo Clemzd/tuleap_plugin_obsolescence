@@ -61,17 +61,17 @@ class ObsolescenceReportPluginViews {
     		$content .= '<tbody>
     				<tr>
     					<td>' . $technoUse['tech_name'] . '-' . $technoUse['tech_version'] . '</td>' .
-    					'<td class="' . $this->styleDeprecated($depreciate_today) . '">' . $technoUse['depreciate_today'] . '</td>' .
-    					'<td class="' . $this->styleDeprecated($depreciate_two_years) . '">' . $technoUse['depreciate_two_years'] . '</td>' .
+    					'<td class="' . $this->styleDeprecated($depreciate_today) . '"></td>' .
+    					'<td class="' . $this->styleDeprecated($depreciate_two_years) . '"></td>' .
     				'</tr></tbody>';
     	}
     	$content .= '</table>';
     	$score = (($counterDepreciateToday*2) + $counterDepreciateTowYears) / (3 * count($technoUsed));
 		$content .=  '
-			<div class="progress">
+			<div class="progress" style="height : 60px;">
   			<div class="progress-bar" role="progressbar" aria-valuenow="'. $score*100 . '" aria-valuemin="0" aria-valuemax="100" 
-  			style="width: '. $score*100 . '%;">'
-    		. round($score*100,2) . '%
+  			style="width: '. $score*100 . '%;">' .
+    		'<h2 style="margin-bottom: 7px;">' . round($score*100,2) . '%</h2>
   			</div>
 			</div>';
     	
